@@ -16,6 +16,9 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'milia', github: 'jekuno/milia', branch: 'issue#76'
+gem 'twitter-bootstrap-rails'
+gem 'devise-bootstrap-views'
+gem 'toastr-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
