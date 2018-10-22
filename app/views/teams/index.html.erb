@@ -1,0 +1,46 @@
+<%= @tenant.name %><%- model_class = Team -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:image_logo) %></th>
+      <th><%= model_class.human_attribute_name(:image_hero) %></th>
+      <th><%= model_class.human_attribute_name(:tenant_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= link_to team.name, tenant_team_path(id: team.id, tenant_id: team.tenant_id) %></td>
+
+        <td><%= team.description %></td>
+        <td><%= team.image_logo %></td>
+        <td><%= team.image_hero %></td>
+        <td><%= team.tenant_id %></td>
+        <td><%=l team.created_at %></td>
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      tenant_team_path(id: team.id, tenant_id: team.tenant_id), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_tenant_team_path(id: team.id, tenant_id: team.tenant_id), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      tenant_team_path(id: team.id, tenant_id: team.tenant_id),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Add team",
+            new_tenant_team_path,
+            :class => 'btn btn-primary' %>

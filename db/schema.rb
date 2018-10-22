@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181021194233) do
+ActiveRecord::Schema.define(version: 20181021224937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 20181021194233) do
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "image_logo"
+    t.string "image_hero"
+    t.bigint "tenant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_teams_on_tenant_id"
   end
 
   create_table "tenants", force: :cascade do |t|
@@ -73,5 +84,6 @@ ActiveRecord::Schema.define(version: 20181021194233) do
 
   add_foreign_key "members", "tenants"
   add_foreign_key "members", "users"
+  add_foreign_key "teams", "tenants"
   add_foreign_key "tenants", "tenants"
 end

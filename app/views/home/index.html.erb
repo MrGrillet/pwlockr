@@ -2,6 +2,10 @@
 
 <h3>Organization: <%= @tenant.name %></h3>
 
+<%= render 'teams/list'%>
+
+
+<%= link_to 'Teams', tenant_teams_path(@tenant), class: "btn btn-primary" %>
 <% else %>
 
 <div class="jumbotron">
