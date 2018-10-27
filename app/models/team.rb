@@ -2,7 +2,7 @@ class Team < ApplicationRecord
   belongs_to :tenant
   has_many :passwords, dependent: :destroy
 
-  has_many :users
+  has_many :user_teams
   has_many :users, through: :user_teams
 
   validates_uniqueness_of :name
@@ -26,8 +26,10 @@ class Team < ApplicationRecord
       if user.is_admin?
         tenant.teams.order(:id).limit(1)
       else
-        user.teams_where(tenant_id: tenant.id).order(:id).limit(1)
+        user.teams.where(tenant_id: tenant.id).order(:id).limit(1)
       end
     end
+
+    # Team.all
   end
 end

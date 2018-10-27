@@ -2,28 +2,20 @@ class PasswordsController < ApplicationController
   before_action :set_password, only: [:show, :edit, :update, :destroy]
   before_action :set_tenant, only: [:index, :new, :show, :edit, :update, :destroy]
 
-  # GET /passwords
-  # GET /passwords.json
   def index
     @passwords = Password.all
   end
 
-  # GET /passwords/1
-  # GET /passwords/1.json
   def show
   end
 
-  # GET /passwords/new
   def new
     @password = Password.new
   end
 
-  # GET /passwords/1/edit
   def edit
   end
 
-  # POST /passwords
-  # POST /passwords.json
   def create
     @password = Password.new(password_params)
 
@@ -38,8 +30,6 @@ class PasswordsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /passwords/1
-  # PATCH/PUT /passwords/1.json
   def update
     respond_to do |format|
       if @password.update(password_params)
@@ -52,8 +42,6 @@ class PasswordsController < ApplicationController
     end
   end
 
-  # DELETE /passwords/1
-  # DELETE /passwords/1.json
   def destroy
     @password.destroy
     respond_to do |format|
@@ -67,12 +55,10 @@ class PasswordsController < ApplicationController
       @tenant = Tenant.find(session[:tenant_id])
     end
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_password
       @password = Password.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def password_params
       params.require(:password).permit(:name, :key, :team_id)
     end
