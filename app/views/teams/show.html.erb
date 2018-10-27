@@ -44,10 +44,9 @@
   <dd><%= @team.tenant_id %></dd>
 </dl>
 
-<%= link_to "Organisation home",
-              root_path, :class => 'btn btn-default'  %>
+<%= link_to "Organisation home", root_path, :class => 'btn btn-default'  %>
 
-<%= link_to 'edit project users', users_tenant_teams_path(tenant_id: @team.tenant_id, @team.id), class: "btn btn-primary"  %>
+<%= link_to 'edit team users', users_tenant_team_path(@team.id), class: "btn btn-primary"  %>
 
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_tenant_team_path(team: @team, tenant: @team.tenant_id), :class => 'btn btn-default' %>
