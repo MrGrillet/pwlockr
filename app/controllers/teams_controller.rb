@@ -1,32 +1,40 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
-  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :new, :create, :index]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :users, :add_user]
+  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :new, :create, :users, :add_user]
   before_action :verify_tenant
 
-  # GET /teams
-  # GET /teams.json
+
   def index
-    @teams = Team.where(tenant_id: @tenant)
+    # if current_user
+    #   if session[:tenant_id]
+    #     Tenant.set_current_tenant session[:tenant_id]
+    #   else
+    #     Tenant.set_current_tenant current_user.tenants.first
+    #   end
+    #
+    #   @tenant = Tenant.current_tenant
+      @teams = Team.by_user_plan_and_tenant(@tenant.id, current_user)
+    #   params[:tenant_id] = @tenant.id
+    # end
   end
 
-  # GET /teams/1
-  # GET /teams/1.json
+
   def show
   end
 
-  # GET /teams/new
+
   def new
     @team = Team.new
   end
 
-  # GET /teams/1/edit
+
   def edit
   end
 
-  # POST /teams
-  # POST /teams.json
+
   def create
     @team = Team.new(team_params)
+    @team.users << current_user
 
     respond_to do |format|
       if @team.save
@@ -57,6 +65,22 @@ class TeamsController < ApplicationController
       format.html { redirect_to root_url, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def users
+    @team_users = (@team.users + (User.where(tenant_id: @tenant.id, is_admin: true))) - [current_user]
+    @other_users = @tenant.users.where(tenant_id: @tenant.id, is_admin:false) - (@team_users + [current_user])
+  end
+
+  def add_user
+    @team_user = UserTeam.new(user_id: params[:user_id], team_id: @team.id)
+
+    respond_to do |format|
+      if @team_user.save
+        format.html { redirect_to users_tenant_team_url(id: @team.id, tenant_id: @team.tenant_id), notice: "User added to team"}
+      else
+        format.html { redirect_to users_tenant_team_url(id: @team.id, tenant_id: @team.tenant_id), error: "User was not added to team"}
+      end
   end
 
   private

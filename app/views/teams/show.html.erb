@@ -1,3 +1,30 @@
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="index.html"><%= current_tenant.name %></a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="pages-app.html">User Name</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Teams</li>
+    </ol>
+  </nav>
+
+  <div class="dropdown">
+    <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+      <i class="material-icons">settings</i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+      <a class="dropdown-item" href="nav-side-team.html#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
+      <a class="dropdown-item" href="nav-side-team.html#">Share</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item text-danger" href="nav-side-team.html#">Leave</a>
+    </div>
+  </div>
+
+</div>
+
 <%- model_class = Team -%>
 <div class="page-header">
   <h1><%= @team.name %></h1>
@@ -19,6 +46,9 @@
 
 <%= link_to "Organisation home",
               root_path, :class => 'btn btn-default'  %>
+
+<%= link_to 'edit project users', users_tenant_teams_path(tenant_id: @team.tenant_id, @team.id), class: "btn btn-primary"  %>
+
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_tenant_team_path(team: @team, tenant: @team.tenant_id), :class => 'btn btn-default' %>
 <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

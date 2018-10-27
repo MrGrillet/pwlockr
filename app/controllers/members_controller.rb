@@ -23,6 +23,11 @@ class MembersController < ApplicationController
 
   end
 
+  def dashboard
+    @passwords = Password.all
+    @teams = Team.all
+  end
+
 
   private
 

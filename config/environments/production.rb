@@ -1,5 +1,5 @@
 Rails.application.configure do
-   
+
   # devise says to define default url
   config.action_mailer.default_url_options = { :host => 'secure.simple-milia-app.com', :protocol => 'https' }
 
@@ -13,6 +13,10 @@ Rails.application.configure do
     :password       => ENV['SENDGRID_PASSWORD'],
     :domain         => 'heroku.com'
   }
+
+  STRIPE_SECRET= ENV['STRIPE_SECRET_KEY']
+  STRIPE_PUBLISHABLE= ENV['STRIPE_PUBLISHABLE_KEY']
+  STRIPE_SUBSCRIPTION_PLAN= "plan_DoaYu4ZcWuvujv"
 
   # Settings specified here will take precedence over those in config/application.rb.
 

@@ -13,6 +13,10 @@ module ApplicationHelper
 
   def tenant_name(tenant_id)
     Tenant.find(tenant_id).name
-    # Tenant.find(1).name
   end
+
+  def current_tenant
+    @tenant = Tenant.find(session[:tenant_id])
+  end
+
 end

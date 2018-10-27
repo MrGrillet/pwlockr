@@ -1,5 +1,5 @@
 Rails.application.configure do
-   
+
   # devise says to define default url
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
@@ -8,7 +8,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.delivery_method = :smtp
-  
+
   ActionMailer::Base.smtp_settings = {
     :address => "smtp.gmail.com",
     :port => "587",
@@ -17,6 +17,11 @@ Rails.application.configure do
     :password => ENV["SMTP_ENTRY"],
     :enable_starttls_auto => true
   }
+
+  require "stripe"
+  STRIPE_SECRET= ENV['STRIPE_TEST_SECRET_KEY']
+  STRIPE_PUBLISHABLE= ENV['STRIPE_TEST_PUBLISHABLE_KEY']
+  STRIPE_SUBSCRIPTION_PLAN= "standard subscription"
 
   # Settings specified here will take precedence over those in config/application.rb.
 

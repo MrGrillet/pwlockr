@@ -1,0 +1,4 @@
+<%= link_to 'Edit Profile', edit_user_registration_path, class: 'dropdown-item' %>
+<a href="utility-account-settings.html" class="dropdown-item">My Passwords</a>
+<a href="utility-account-settings.html" class="dropdown-item">My Teams</a>
+<%= link_to('Logout', destroy_user_session_path, class: 'dropdown-item', title: 'Logout', :method => :delete) %>

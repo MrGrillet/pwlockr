@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-11 col-xl-10">
+      <div class="page-header">
+        <h1>Users</h1>
+        <p class="lead">Put the user first.</p>
+      </div>
+    </div>
+  </div>
+
+
+<% @users.each do |user| %>
+  <%= user.email %><br>
+<% end %>
+
+<form class="" id="user-manage-modal" tabindex="-1" role="dialog" aria-labelledby="user-manage-modal" style="display: block; padding-left: 0px;">
+  <div class="" role="document">
+    <div class="modal-content">
+
+      <div class="">
+        <div class="users-manage" data-filter-list="form-group-users">
+
+          <div class="input-group input-group-round">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="material-icons">filter_list</i>
+              </span>
+            </div>
+            <input type="search" class="form-control filter-list-input" placeholder="Filter members" aria-label="Filter Members" aria-describedby="filter-members">
+          </div>
+        <% @users.each do |user| %>
+          <div class="form-group-users filter-list-1540589237272">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="user-manage-1" checked="">
+              <label class="custom-control-label" for="user-manage-1">
+                <div class="d-flex align-items-center">
+                  <img alt="Claire Connors" src="assets/img/avatar-female-1.jpg" class="avatar mr-2">
+                  <span class="h6 mb-0 SPAN-filter-by-text" data-filter-by="text"><%= user.email %></span>
+                </div>
+              </label>
+            </div>
+          <% end %>
+
+
+            
+          </div>
+        </div>
+      </div>
+      <!--end of modal body-->
+      <div class="modal-footer">
+        <button role="button" class="btn btn-primary" type="submit">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+</div>

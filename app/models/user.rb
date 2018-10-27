@@ -6,4 +6,20 @@ class User < ApplicationRecord
 
   acts_as_universal_and_determines_account
   has_one :member, :dependent => :destroy
+
+
+  has_many :user_projects
+  has_many :projects, through: :user_projects
+
+  has_many :teams
+  has_many :teams, through: :user_teams
+
+
+  def is_admin?
+    is_admin
+  end
+
+  def is_organisation_admin?
+    is_admin
+  end
 end

@@ -1,5 +1,10 @@
 class Team < ApplicationRecord
   belongs_to :tenant
+  has_many :passwords, dependent: :destroy
+
+  has_many :users
+  has_many :users, through: :user_teams
+
   validates_uniqueness_of :name
   validate :free_plan_can_only_have_one_team
 
@@ -9,12 +14,20 @@ class Team < ApplicationRecord
     end
   end
 
-  def self.by_user_plan_and_tenant(tenant_id)
+  def self.by_user_plan_and_tenant(tenant_id, user)
     tenant = Tenant.find(tenant_id)
     if tenant.plan == 'premium'
-      tenant.teams
+      if user.is_admin?
+        tenant.teams
+      else
+        user.teams.where(tenant_id: tenant.id)
+      end
     else
-      tenant.teams.order(:id).limit(1)
+      if user.is_admin?
+        tenant.teams.order(:id).limit(1)
+      else
+        user.teams_where(tenant_id: tenant.id).order(:id).limit(1)
+      end
     end
   end
 end

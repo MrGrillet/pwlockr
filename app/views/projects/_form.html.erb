@@ -1,0 +1,30 @@
+<%# form_with(@tenant, project, local: true) do |form| %>
+<%= form_for [@tenant, project], :html => { :class => "form-horizontal team" } do |form| %>
+  <% if project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :project_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :project_description %>
+  </div>
+
+  <%= form.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
