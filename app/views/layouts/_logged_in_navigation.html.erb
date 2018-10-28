@@ -3,6 +3,19 @@
     <img alt="Pipeline" src="<%= asset_path('logo.svg') %>"/>
   </a>
   <h4 class="text-white"><%= current_tenant.name %></h4>
+  <div>
+    <div class="dropdown my-2 ">
+      <button class="px-3 btn btn-primary btn-block dropdown-toggle" type="button" id="newContentButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Add New
+      </button>
+      <div class="dropdown-menu" aria-labelledby="newContentButton">
+        <%= link_to "Password", new_password_path, class: 'dropdown-item' %>
+        <%= link_to "Team Member", new_member_path, class: 'dropdown-item' %>
+        <%= link_to "Client", "/", class: 'dropdown-item' %>
+        <%= link_to "Project", "/", class: 'dropdown-item' %>
+      </div>
+    </div>
+  </div>
   <div class="d-flex align-items-center">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -25,9 +38,10 @@
         <%= link_to 'Dashboard', dashboard_path, class: 'nav-link' %>
       </li>
 
+<% if current_user.is_admin? %>
       <li class="nav-item">
 
-        <a class="nav-link" href="nav-side-project.html#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3">Admin Menu</a>
+        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3">Admin Menu</a>
         <div id="submenu-3" class="collapse">
           <ul class="nav nav-small flex-column">
 
@@ -46,7 +60,10 @@
         </div>
 
       </li>
+<% end %>
 
+
+<% if current_user.is_admin? || current_user.is_manager? %>
       <li class="nav-item">
 
         <a class="nav-link" href="nav-side-project.html#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2">Manager Menu</a>
@@ -69,6 +86,7 @@
         </div>
 
       </li>
+      <% end %>
 
       <li class="nav-item">
         <%= link_to "Passwords", passwords_path, class: 'nav-link'%>
@@ -84,9 +102,11 @@
       </li>
 
       <li class="nav-item">
-
         <a class="nav-link" href="<%= faqs_path %>">FAQ</a>
+      </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="<%= blogs_path %>">Blog</a>
       </li>
 
       <li class="nav-item">
@@ -95,7 +115,7 @@
       </li>
 
     </ul>
-    <hr>
+    <!-- <hr>
     <div class="d-none d-lg-block w-100">
       <span class="text-small text-muted">Recent Passwords</span>
       <ul class="nav nav-small flex-column mt-2">
@@ -106,26 +126,13 @@
         </li>
       </ul>
       <hr>
-    </div>
-    <div>
-      <div class="dropdown mt-2">
-        <button class="btn btn-primary btn-block dropdown-toggle" type="button" id="newContentButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Add New
-        </button>
-        <div class="dropdown-menu" aria-labelledby="newContentButton">
-          <a class="dropdown-item" href="/">Client</a>
-          <a class="dropdown-item" href="/">Project</a>
-          <a class="dropdown-item" href="/">Team</a>
-          <%= link_to "Password", new_password_path, class: 'dropdown-item' %>
+    </div> -->
 
-        </div>
-      </div>
-    </div>
   </div>
   <div class="d-none d-lg-block">
     <div class="dropup">
       <a href="nav-side-project.html#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar"/>
+        <img alt="Image" src="<%= asset_path('avatar-male-4.jpg') %>" class="avatar"/>
       </a>
       <div class="dropdown-menu">
         <a href="nav-side-user.html" class="dropdown-item">Profile</a>

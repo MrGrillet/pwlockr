@@ -1,19 +1,16 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <% notice %>
+  <h1><%= @faq.title %></h1>
+  <p class="lead"><%= @faq.excerpt %></p>
+  <hr>
+  <p><%= simple_format(@faq.answer) %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @faq.title %>
-</p>
+  <hr>
+  <div class="">
+    <%= link_to 'Back', faqs_path, class: "btn btn-primary mr-2" %>
+    <% if current_user.is_admin? %>
+      <%= link_to 'Edit', edit_faq_path(@faq) %>
+    <% end %>
+  </div>
 
-<p>
-  <strong>Excerpt:</strong>
-  <%= @faq.excerpt %>
-</p>
-
-<p>
-  <strong>Answer:</strong>
-  <%= @faq.answer %>
-</p>
-
-<%= link_to 'Edit', edit_faq_path(@faq) %> |
-<%= link_to 'Back', faqs_path %>
+</div>

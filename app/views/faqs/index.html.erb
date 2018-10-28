@@ -3,39 +3,23 @@
     <h1>FAQ</h1>
   </div>
 </div>
-
-
-
 <div class="container">
 <p id="notice"><%= notice %></p>
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Excerpt</th>
-      <th>Answer</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @faqs.each do |faq| %>
-      <tr>
-        <td><%= faq.title %></td>
-        <td><%= faq.excerpt %></td>
-        <td><%= faq.answer %></td>
-        <td><%= link_to 'Show', faq %></td>
-        <td><%= link_to 'Edit', edit_faq_path(faq) %></td>
-        <td><%= link_to 'Destroy', faq, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <div class="mb-3">
+      <hr>
+      <h2><a href="<%= faq_path(faq) %>"><%= faq.title %></a></h2>
+      <p class="lead"><%= faq.excerpt %></p>
+      <%= link_to 'Show', faq, class: "btn btn-primary" %>
+      <% if current_user.is_admin? %>
+        <%= link_to 'Edit', edit_faq_path(faq), class: "btn btn btn-outline-dark" %>
+        <%= link_to 'Destroy', faq, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
+      <% end %>
+    </div>
     <% end %>
-  </tbody>
-</table>
-
 <br>
 
-<%= link_to 'New Faq', new_faq_path, class: "btn btn-primary" %>
-
+<% if current_user.is_admin? %>
+  <%= link_to 'New Faq', new_faq_path, class: "btn btn-outline-dark" %>
+<% end %>
 </div>

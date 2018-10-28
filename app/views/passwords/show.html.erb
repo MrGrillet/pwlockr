@@ -1,19 +1,18 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h1><%= @password.name %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @password.name %>
-</p>
+  <p>
+    <strong>Key:</strong>
+    <%= @password.key %>
+  </p>
 
-<p>
-  <strong>Key:</strong>
-  <%= @password.key %>
-</p>
+  <p>
+    <strong>Team:</strong>
+    <%= @password.team %>
+  </p>
 
-<p>
-  <strong>Team:</strong>
-  <%= @password.team %>
-</p>
+  <%= link_to 'Edit', edit_password_path(@password) %> |
+  <%= link_to 'Back', passwords_path %>
 
-<%= link_to 'Edit', edit_password_path(@password) %> |
-<%= link_to 'Back', passwords_path %>
+</div>

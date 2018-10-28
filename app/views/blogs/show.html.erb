@@ -1,19 +1,16 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <% notice %>
+  <h1><%= @blog.title %></h1>
+  <p class="lead"><%= @blog.excerpt %></p>
+  <hr>
+  <p><%= simple_format(@blog.body) %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @blog.title %>
-</p>
+  <hr>
+  <div class="">
+    <%= link_to 'Back', blogs_path, class: "btn btn-primary mr-2" %>
+    <% if current_user.is_admin? %>
+      <%= link_to 'Edit', edit_blog_path(@blog) %>
+    <% end %>
+  </div>
 
-<p>
-  <strong>Excerpt:</strong>
-  <%= @blog.excerpt %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @blog.body %>
-</p>
-
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+</div>

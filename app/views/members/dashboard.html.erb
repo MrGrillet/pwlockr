@@ -2,10 +2,10 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html">Organisation</a>
+        <a href="/"><%= current_tenant.name %></a>
       </li>
       <li class="breadcrumb-item">
-        <a href="/">User Name</a>
+        <a href="/"><%= User.find(current_user.id).member.first_name %> <%= User.find(current_user.id).member.last_name %></a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
     </ol>
@@ -164,7 +164,7 @@
 
 
 
-              
+
 
             </div>
             <!--end of content-list-body-->

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :tenants do
     resources :teams do
       get 'users', on: :member
-      put 'add_user', on: :member 
+      put 'add_user', on: :member
     end
     resources :clients
     resources :projects
@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'members#dashboard'
   get 'admin', to: 'admin#index'
   get 'admin/users', to: 'admin#users'
+  get 'blog', to: 'blogs#index'
+  get 'members/activity', to: 'members#activity'
 
 
 end

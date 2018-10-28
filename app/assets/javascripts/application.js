@@ -15,6 +15,8 @@
 //= require_tree .
 //= require toastr
 
+
+
 toastr.options = {
   "closeButton": false,
   "debug": false,

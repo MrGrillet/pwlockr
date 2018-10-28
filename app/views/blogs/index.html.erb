@@ -4,35 +4,23 @@
   </div>
 </div>
 
-
+<div class="container">
 <p id="notice"><%= notice %></p>
-
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Excerpt</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @blogs.each do |blog| %>
-      <tr>
-        <td><%= blog.title %></td>
-        <td><%= blog.excerpt %></td>
-        <td><%= blog.body %></td>
-        <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <div class="mb-3">
+      <hr>
+      <h2><a href="<%= blog_path(blog) %>"><%= blog.title %></a></h2>
+      <p class="lead"><%= blog.excerpt %></p>
+      <%= link_to 'Show', blog, class: "btn btn-primary" %>
+      <% if current_user.is_admin? %>
+        <%= link_to 'Edit', edit_blog_path(blog), class: "btn btn btn-outline-dark" %>
+        <%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
+      <% end %>
+    </div>
     <% end %>
-  </tbody>
-</table>
-
 <br>
 
-<%= link_to 'New Blog', new_blog_path %>
+<% if current_user.is_admin? %>
+  <%= link_to 'New blog', new_blog_path, class: "btn btn-outline-dark" %>
+<% end %>
+</div>

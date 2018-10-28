@@ -28,6 +28,9 @@ class MembersController < ApplicationController
     @teams = Team.all
   end
 
+  def activity
+  end
+
 
   private
 
