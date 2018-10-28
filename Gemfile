@@ -21,6 +21,7 @@ gem 'milia', github: 'jekuno/milia', branch: 'issue#76'
 gem 'toastr-rails'
 gem 'jquery-rails'
 gem 'stripe'
+gem 'material_design_icons'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

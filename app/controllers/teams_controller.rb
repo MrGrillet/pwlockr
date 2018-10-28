@@ -6,6 +6,7 @@ class TeamsController < ApplicationController
 
   def index
     @teams = Team.by_user_plan_and_tenant(params[:tenant_id], current_user)
+    @staff = User.all
   end
 
   def show

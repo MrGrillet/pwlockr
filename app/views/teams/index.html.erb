@@ -5,7 +5,7 @@
         <a href="index.html"><%= current_tenant.name %></a>
       </li>
       <li class="breadcrumb-item">
-        <a href="pages-app.html">User Name</a>
+        <a href="#"><%= User.find(current_user.id).member.first_name %> <%= User.find(current_user.id).member.last_name %></a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">Teams</li>
     </ol>
@@ -16,10 +16,10 @@
       <i class="material-icons">settings</i>
     </button>
     <div class="dropdown-menu dropdown-menu-right">
-      <a class="dropdown-item" href="nav-side-team.html#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
-      <a class="dropdown-item" href="nav-side-team.html#">Share</a>
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
+      <a class="dropdown-item" href="#">Share</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item text-danger" href="nav-side-team.html#">Leave</a>
+      <a class="dropdown-item text-danger" href="#">Leave</a>
     </div>
   </div>
 
@@ -36,81 +36,24 @@
         <div class="d-flex align-items-center">
           <ul class="avatars">
 
+<% @staff.each do |user| %>
+
             <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Claire Connors">
-                <img alt="Claire Connors" class="avatar" src="assets/img/avatar-female-1.jpg"/>
+              <a href="#" data-toggle="tooltip" data-placement="top" title="
+<%= User.find(user.id).member.first_name %> <%= User.find(user.id).member.last_name %>
+                                                                            ">
+                <img alt="<%= User.find(user.id).member.first_name %> <%= User.find(user.id).member.last_name %>" class="avatar" src="<%= asset_path('avatar-female-1.jpg') %>"/>
               </a>
             </li>
 
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Marcus Simmons">
-                <img alt="Marcus Simmons" class="avatar" src="assets/img/avatar-male-1.jpg"/>
-              </a>
-            </li>
+<% end %>
 
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Peggy Brown">
-                <img alt="Peggy Brown" class="avatar" src="assets/img/avatar-female-2.jpg"/>
-              </a>
-            </li>
-
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Harry Xai">
-                <img alt="Harry Xai" class="avatar" src="assets/img/avatar-male-2.jpg"/>
-              </a>
-            </li>
-
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Sally Harper">
-                <img alt="Sally Harper" class="avatar" src="assets/img/avatar-female-3.jpg"/>
-              </a>
-            </li>
-
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Ravi Singh">
-                <img alt="Ravi Singh" class="avatar" src="assets/img/avatar-male-3.jpg"/>
-              </a>
-            </li>
-
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Kristina Van Der Stroem">
-                <img alt="Kristina Van Der Stroem" class="avatar" src="assets/img/avatar-female-4.jpg"/>
-              </a>
-            </li>
-
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="David Whittaker">
-                <img alt="David Whittaker" class="avatar" src="assets/img/avatar-male-4.jpg"/>
-              </a>
-            </li>
-
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Kerri-Anne Banks">
-                <img alt="Kerri-Anne Banks" class="avatar" src="assets/img/avatar-female-5.jpg"/>
-              </a>
-            </li>
-
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Masimba Sibanda">
-                <img alt="Masimba Sibanda" class="avatar" src="assets/img/avatar-male-5.jpg"/>
-              </a>
-            </li>
-
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Krishna Bajaj">
-                <img alt="Krishna Bajaj" class="avatar" src="assets/img/avatar-female-6.jpg"/>
-              </a>
-            </li>
-
-            <li>
-              <a href="nav-side-team.html#" data-toggle="tooltip" data-placement="top" title="Kenny Tran">
-                <img alt="Kenny Tran" class="avatar" src="assets/img/avatar-male-6.jpg"/>
-              </a>
             </li>
 
           </ul>
           <button class="btn btn-round" data-toggle="modal" data-target="#user-invite-modal">
-            <i class="material-icons">add</i>
+            <i class="mdi mdi-plus"></i>
+             <!-- <i class="material-icons">add</i> -->
           </button>
         </div>
       </div>
@@ -132,7 +75,8 @@
               <div class="col-auto">
                 <h3>Teams</h3>
                 <button class="btn btn-round" data-toggle="modal" data-target="#project-add-modal">
-                  <i class="material-icons">add</i>
+                  <i class="mdi mdi-plus"></i>
+
                 </button>
               </div>
               <form class="col-md-auto">
@@ -374,7 +318,7 @@
             <div class="modal-header">
               <h5 class="modal-title">Invite Users</h5>
               <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
-                <i class="material-icons">close</i>
+                <i class="mdi mdi-close"></i>
               </button>
             </div>
             <!--end of modal head-->
@@ -384,13 +328,13 @@
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">email</i>
+                      <i class="mdi mdi-email"></i>
                     </span>
                   </div>
                   <input type="email" class="form-control" placeholder="Recipient email address" aria-label="Recipient email address" aria-describedby="recipient-email-address">
                 </div>
                 <div class="text-right text-small mt-2">
-                  <a href="nav-side-team.html#" role="button">Add another recipient</a>
+                  <a href="#" role="button">Add another recipient</a>
                 </div>
               </div>
             </div>
@@ -411,7 +355,7 @@
             <div class="modal-header">
               <h5 class="modal-title">Manage Team</h5>
               <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
-                <i class="material-icons">close</i>
+                <i class="mdi mdi-close"></i>
               </button>
             </div>
             <!--end of modal head-->
@@ -611,7 +555,7 @@
             <div class="modal-header">
               <h5 class="modal-title">New Project</h5>
               <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
-                <i class="material-icons">close</i>
+                <i class="mdi mdi-close"></i>
               </button>
             </div>
             <!--end of modal head-->

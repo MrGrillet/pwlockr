@@ -36,6 +36,12 @@
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Inter UI", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
+  @font-face {
+    font-family: 'Inter UI Regualr';
+    src:
+  font-url('Inter-UI-Regualr.woff'); }
+
+
 *,
 *::before,
 *::after {
@@ -3284,7 +3290,7 @@ input[type="button"].btn-block {
     display: inline-block;
     padding-right: 0.25rem;
     color: #adb5bd;
-    content: ""; }
+    content: ">"; }
 
 .breadcrumb-item + .breadcrumb-item:hover::before {
   text-decoration: underline; }

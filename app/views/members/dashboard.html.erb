@@ -5,7 +5,8 @@
         <a href="/"><%= current_tenant.name %></a>
       </li>
       <li class="breadcrumb-item">
-        <a href="/"><%= User.find(current_user.id).member.first_name %> <%= User.find(current_user.id).member.last_name %></a>
+        <a href="/"><%= User.find(current_user.id).member.first_name %>
+          <%= User.find(current_user.id).member.last_name %></a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
     </ol>
@@ -24,7 +25,7 @@
           <img alt="Image" src="<%= asset_path('avatar-male-4.jpg') %>" class="avatar avatar-lg mt-1"/>
           <div class="media-body ml-3">
             <h1 class="mb-0">Dashboard</h1>
-            <p class="lead">Interface designer and front-end developer</p>
+            <p class="lead"><%= current_tenant.name %></p>
           </div>
         </div>
       </div>
@@ -45,16 +46,16 @@
                     <a href="<%= password_path(password) %>">
                       <h6 data-filter-by="text"><%= password.name %></h6>
                     </a>
-                    <span class="text-small"><%= password.created_at %></span>
+                    <span class="text-small">Last updated:
+                      <%= password.created_at.strftime('%e %b %Y') %></span>
                   </div>
                   <div class="card-meta">
                     <div class="d-flex align-items-center">
-                      <i class="material-icons">playlist_add_check</i>
-                      <span>3/4</span>
+                      <%= link_to 'View', password_path(password), class: "btn btn-primary" %>
                     </div>
                     <div class="dropdown card-options">
                       <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="material-icons">more_vert</i>
+                        Options
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
                         <%= link_to 'Show', password, class: "dropdown-item" %>
@@ -85,18 +86,16 @@
             <div class="row content-list-head">
               <div class="col-auto">
                 <h3>Teams</h3>
-                <button class="btn btn-round" data-toggle="modal" data-target="#team-add-modal">
-                  <i class="material-icons">add</i>
-                </button>
+
               </div>
               <form class="col-md-auto">
                 <div class="input-group input-group-round">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">filter_list</i>
+                      <!-- <i class="material-icons">filter_list</i> -->
                     </span>
                   </div>
-                  <input type="search" class="form-control filter-list-input" placeholder="Filter teams" aria-label="Filter teams" aria-describedby="filter-teams">
+                  <input type="search" class="form-control filter-list-input" placeholder="Filter teams" aria-label="Search Teams" aria-describedby="filter-teams">
                 </div>
               </form>
             </div>
@@ -105,66 +104,54 @@
 
               <% @teams.each do |team| %>
 
-                          <div class="col-lg-6">
-                            <div class="card card-project">
+                <div class="col-lg-6">
+                  <div class="card card-project">
 
-                              <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
+                    <div class="progress">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
 
-                              <div class="card-body">
-                                <div class="dropdown card-options">
-                                  <button class="btn-options" type="button" id="project-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                  </button>
-                                  <div class="dropdown-menu dropdown-menu-right">
-                                    <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_tenant_team_path(id: team.id, tenant_id: team.tenant_id), :class => 'dropdown-item' %>
-                                    <%= link_to t('.destroy', :default => t("helpers.links.destroy")), tenant_team_path(id: team.id, tenant_id: team.tenant_id), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))
-                                    }, :class => 'dropdown-item text-danger' %>
-                                  </div>
-                                </div>
-                                <div class="card-title">
-                                  <a href="<%= tenant_team_path(id: team.id, tenant_id: team.tenant_id) %>">
-                                    <h5 data-filter-by="text"><%= team.name %></h5>
-                                  </a>
-                                </div>
-                                <ul class="avatars">
+                    <div class="card-body">
+                      <% if current_user.is_admin? %>
+                        <div class="dropdown card-options">
+                          <button class="btn-options" type="button" id="project-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Options
+                          </button>
 
-                                  <li>
-                                    <a href="nav-side-team.html#" data-toggle="tooltip" title="Kenny">
-                                      <img alt="Kenny Tran" class="avatar" src="assets/img/avatar-male-6.jpg" data-filter-by="alt"/>
-                                    </a>
-                                  </li>
-
-                                  <li>
-                                    <a href="nav-side-team.html#" data-toggle="tooltip" title="Peggy">
-                                      <img alt="Peggy Brown" class="avatar" src="assets/img/avatar-female-2.jpg" data-filter-by="alt"/>
-                                    </a>
-                                  </li>
-
-                                  <li>
-                                    <a href="nav-side-team.html#" data-toggle="tooltip" title="Ravi">
-                                      <img alt="Ravi Singh" class="avatar" src="assets/img/avatar-male-3.jpg" data-filter-by="alt"/>
-                                    </a>
-                                  </li>
-
-                                </ul>
-                                <div class="card-meta d-flex justify-content-between">
-                                  <div class="d-flex align-items-center">
-                                    <i class="material-icons mr-1">playlist_add_check</i>
-                                    <span class="text-small">6/10</span>
-                                  </div>
-                                  <span class="text-small" data-filter-by="text">Due 4 days</span>
-                                </div>
-                              </div>
-                            </div>
+                          <div class="dropdown-menu dropdown-menu-right">
+                            <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_tenant_team_path(id: team.id, tenant_id: team.tenant_id), :class => 'dropdown-item' %>
+                            <%= link_to t('.destroy', :default => t("helpers.links.destroy")), tenant_team_path(id: team.id, tenant_id: team.tenant_id), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))
+                            }, :class => 'dropdown-item text-danger' %>
                           </div>
+                        <% end %>
+                      </div>
+                      <div class="card-title">
+                        <a href="<%= tenant_team_path(id: team.id, tenant_id: team.tenant_id) %>">
+                          <h5 data-filter-by="text"><%= team.name %></h5>
+                        </a>
+                      </div>
+                      <ul class="avatars">
+
+                        <% team.user_ids.each do |team_member| %>
+                          <li>
+                            <a href="#" data-toggle="tooltip" title="<%= User.find(team_member).member.first_name %> <%= User.find(team_member).member.last_name %>">
+                              <img alt="<%= User.find(team_member).member.first_name %> <%= User.find(team_member).member.last_name %>" class="avatar" src="<%= asset_path('avatar-male-6.jpg') %>" data-filter-by="alt"/>
+                            </a>
+                          </li>
+                        <% end %>
+
+                      </ul>
+                      <div class="card-meta d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                          Updated:
+                        </div>
+                        <span class="text-small" data-filter-by="text"><%= team.updated_at.strftime('%e %b %Y') %></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
               <% end %>
-
-
-
-
 
             </div>
             <!--end of content-list-body-->
@@ -558,7 +545,7 @@
               <div class="modal-header">
                 <h5 class="modal-title">New Team</h5>
                 <button type="button" class="close btn btn-round" data-dismiss="modal" aria-label="Close">
-                  <i class="material-icons">close</i>
+                  <i class="mdi mdi-close"></i>
                 </button>
               </div>
               <!--end of modal head-->
@@ -609,7 +596,8 @@
                       <div class="input-group input-group-round">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            <i class="material-icons">filter_list</i>
+                            <i class="mdi mdi-filter_list"></i>
+                            <!-- <i class="material-icons">filter_list</i> -->
                           </span>
                         </div>
                         <input type="search" class="form-control filter-list-input" placeholder="Filter members" aria-label="Filter Members" aria-describedby="filter-members">
