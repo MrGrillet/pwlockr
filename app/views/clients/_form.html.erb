@@ -1,4 +1,6 @@
-<%= form_with(model: client, local: true) do |form| %>
+
+<%= form_for [@tenant, client], :html => { :class => "form-horizontal team" } do |form| %>
+<%# form_with(model: client, local: true) do |form| %>
   <% if client.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
@@ -21,10 +23,11 @@
     <%= form.text_area :description, id: :client_description %>
   </div>
 
-  <div class="field">
-    <%= form.label :tenant_id %>
-    <%= form.text_field :tenant_id, id: :client_tenant_id %>
-  </div>
+  <%= form.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
+
+  <h4>Assign Manager</h4>
+  <%= form.select(:manager_id, User.all.collect { |team| [ team.member.first_name , team.id ]}, {:include_blank => "None"}, {:class => 'custom-select'}) %>
+
 
   <div class="actions">
     <%= form.submit %>

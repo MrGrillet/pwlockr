@@ -1,4 +1,6 @@
 class MembersController < ApplicationController
+  before_action :set_tenant, only: [:index, :new, :show, :edit, :update, :destroy, :dashboard]
+
 
   # uncomment to ensure common layout for forms
   # layout  "sign", :only => [:new, :edit, :create]
@@ -24,15 +26,22 @@ class MembersController < ApplicationController
   end
 
   def dashboard
-    @passwords = Password.all
-    @teams = Team.all
+    @user_passwords = Password.where(tenant_id: @tenant)
+    @teams = Team.where(tenant_id: @tenant)
   end
 
   def activity
   end
 
+  def show
+    @user = params[:id]
+  end
+
 
   private
+  def set_tenant
+    @tenant = Tenant.find(session[:tenant_id])
+  end
 
   def member_params()
     params.require(:member).permit(:first_name, :last_name)

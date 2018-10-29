@@ -1,7 +1,8 @@
+
 <%= form_with(model: password, local: true) do |form| %>
   <% if password.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(password.errors.count, "error") %> prohibited this password from being saved:</h2>
+      <p><%= pluralize(password.errors.count, "error") %> prohibited this password from being saved:</p>
 
       <ul>
       <% password.errors.full_messages.each do |message| %>
@@ -21,10 +22,14 @@
     <%= form.text_field :key, id: :password_key %>
   </div>
 
-  <div class="field">
-    <%= form.label :team_id %>
-    <%= form.text_field :team_id, id: :password_team_id %>
-  </div>
+  <%= form.hidden_field :tenant_id, value: @tenant.id %>
+
+
+    <h4>Assign to Team</h4>
+    <%= form.select(:team_id, Team.all.collect { |team| [ team.name , team.id ]}, {:include_blank => "None"}, {:class => 'custom-select'}) %>
+
+    <h4>Assign to Client</h4>
+    <%= form.select(:manager_id, Client.all.collect { |client| [ client.name , client.id ]}, {:include_blank => "None"}, {:class => 'custom-select'}) %>
 
   <div class="actions">
     <%= form.submit %>

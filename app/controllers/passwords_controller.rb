@@ -1,9 +1,10 @@
 class PasswordsController < ApplicationController
   before_action :set_password, only: [:show, :edit, :update, :destroy]
-  before_action :set_tenant, only: [:index, :new, :show, :edit, :update, :destroy]
+  before_action :set_tenant, only: [:index, :new, :show, :edit, :update, :destroy, :create]
 
   def index
     @passwords = Password.all
+    @user_passwords = Password.where(team_id: '').where(client_id: '')
   end
 
   def show
@@ -18,6 +19,7 @@ class PasswordsController < ApplicationController
 
   def create
     @password = Password.new(password_params)
+    
 
     respond_to do |format|
       if @password.save
@@ -60,6 +62,6 @@ class PasswordsController < ApplicationController
     end
 
     def password_params
-      params.require(:password).permit(:name, :key, :team_id)
+      params.require(:password).permit(:name, :key, :team_id, :client_id, :tenant_id)
     end
 end

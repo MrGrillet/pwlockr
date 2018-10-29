@@ -8,7 +8,7 @@
   <hr>
   <div class="">
     <%= link_to 'Back', blogs_path, class: "btn btn-primary mr-2" %>
-    <% if current_user.is_admin? %>
+    <% if current_user && current_user.is_admin? %>
       <%= link_to 'Edit', edit_blog_path(@blog) %>
     <% end %>
   </div>

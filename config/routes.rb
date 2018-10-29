@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-
+  root :to => "marketing#index"
+  get 'about', to: 'marketing#about'
+  get 'features', to: 'marketing#features'
 
   resources :user_teams
   resources :user_projects
@@ -19,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :members
 
-   root :to => "home#index"
+
 
 
   # *MUST* come *BEFORE* devise's definitions (below)

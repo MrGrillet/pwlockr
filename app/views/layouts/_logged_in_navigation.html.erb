@@ -11,8 +11,7 @@
       <div class="dropdown-menu" aria-labelledby="newContentButton">
         <%= link_to "Password", new_password_path, class: 'dropdown-item' %>
         <%= link_to "Team Member", new_member_path, class: 'dropdown-item' %>
-        <%= link_to "Client", "/", class: 'dropdown-item' %>
-        <%= link_to "Project", "/", class: 'dropdown-item' %>
+        <%= link_to "Client", new_tenant_client_path(tenant_id: @tenant.id), class: 'dropdown-item' %>
       </div>
     </div>
   </div>
@@ -95,7 +94,7 @@
         <%= link_to 'Teams', tenant_teams_path(@tenant.id), class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to 'Clients', tenant_teams_path(@tenant.id), class: "nav-link" %>
+        <%= link_to 'Clients', tenant_clients_path(@tenant.id), class: "nav-link" %>
       </li>
       <li class="nav-item">
         <%# link_to 'My Account', @tenant.id, class: "nav-link" %>
@@ -135,9 +134,9 @@
         <img alt="Image" src="<%= asset_path('avatar-male-4.jpg') %>" class="avatar"/>
       </a>
       <div class="dropdown-menu">
-        <a href="nav-side-user.html" class="dropdown-item">Profile</a>
-        <a href="utility-account-settings.html" class="dropdown-item">Account Settings</a>
-        <a href="nav-side-project.html#" class="dropdown-item">Log Out</a>
+        <%= link_to "View Profile", member_path(current_user.id), class: 'dropdown-item' %>
+        <%= link_to "Account Settings", edit_user_registration_path, class: 'dropdown-item' %>
+
       </div>
     </div>
   </div>

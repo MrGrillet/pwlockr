@@ -29,6 +29,10 @@
     </div>
   </div>
 
+  <h4>Assign Manager</h4>
+  <%= f.select(:manager_id, User.all.collect { |user| [ user.member.first_name , user.id ]}, {:include_blank => "None"}, {:class => 'custom-select'}) %>
+
+
   <br />
   <%= f.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
   <%= f.submit nil, :class => 'btn btn-primary' %>

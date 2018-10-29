@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181027153318) do
+ActiveRecord::Schema.define(version: 20181029021911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,20 @@ ActiveRecord::Schema.define(version: 20181027153318) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "client_passwords", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "password_id"
+    t.index ["client_id"], name: "index_client_passwords_on_client_id"
+    t.index ["password_id"], name: "index_client_passwords_on_password_id"
+  end
+
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.bigint "tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "manager_id"
     t.index ["tenant_id"], name: "index_clients_on_tenant_id"
   end
 
@@ -51,13 +59,32 @@ ActiveRecord::Schema.define(version: 20181027153318) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "password_managers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "password_id"
+    t.index ["password_id"], name: "index_password_managers_on_password_id"
+    t.index ["user_id"], name: "index_password_managers_on_user_id"
+  end
+
+  create_table "password_teams", force: :cascade do |t|
+    t.bigint "team_id"
+    t.bigint "password_id"
+    t.index ["password_id"], name: "index_password_teams_on_password_id"
+    t.index ["team_id"], name: "index_password_teams_on_team_id"
+  end
+
   create_table "passwords", force: :cascade do |t|
     t.string "name"
-    t.string "key"
-    t.bigint "team_id"
+    t.string "username"
+    t.string "password"
+    t.text "description"
+    t.text "note"
+    t.bigint "tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_passwords_on_team_id"
+    t.string "key"
+    t.integer "team_id"
+    t.index ["tenant_id"], name: "index_passwords_on_tenant_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -95,6 +122,7 @@ ActiveRecord::Schema.define(version: 20181027153318) do
     t.bigint "tenant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "manager_id"
     t.index ["tenant_id"], name: "index_teams_on_tenant_id"
   end
 
@@ -155,10 +183,16 @@ ActiveRecord::Schema.define(version: 20181027153318) do
     t.index ["tenant_id"], name: "index_users_on_tenant_id"
   end
 
+  add_foreign_key "client_passwords", "clients"
+  add_foreign_key "client_passwords", "passwords"
   add_foreign_key "clients", "tenants"
   add_foreign_key "members", "tenants"
   add_foreign_key "members", "users"
-  add_foreign_key "passwords", "teams"
+  add_foreign_key "password_managers", "passwords"
+  add_foreign_key "password_managers", "users"
+  add_foreign_key "password_teams", "passwords"
+  add_foreign_key "password_teams", "teams"
+  add_foreign_key "passwords", "tenants"
   add_foreign_key "payments", "tenants"
   add_foreign_key "projects", "tenants"
   add_foreign_key "teams", "tenants"

@@ -1,4 +1,4 @@
 class Password < ApplicationRecord
-  belongs_to :team
-  validates_presence_of :name 
+  belongs_to :tenant
+  validates_presence_of :name
 end

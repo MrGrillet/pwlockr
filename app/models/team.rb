@@ -29,7 +29,5 @@ class Team < ApplicationRecord
         user.teams.where(tenant_id: tenant.id).order(:id).limit(1)
       end
     end
-
-    # Team.all
   end
 end

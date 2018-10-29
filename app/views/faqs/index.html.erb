@@ -11,7 +11,7 @@
       <h2><a href="<%= faq_path(faq) %>"><%= faq.title %></a></h2>
       <p class="lead"><%= faq.excerpt %></p>
       <%= link_to 'Show', faq, class: "btn btn-primary" %>
-      <% if current_user.is_admin? %>
+      <% if current_user && current_user.is_admin? %>
         <%= link_to 'Edit', edit_faq_path(faq), class: "btn btn btn-outline-dark" %>
         <%= link_to 'Destroy', faq, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-dark" %>
       <% end %>
@@ -19,7 +19,7 @@
     <% end %>
 <br>
 
-<% if current_user.is_admin? %>
+<% if current_user && current_user.is_admin? %>
   <%= link_to 'New Faq', new_faq_path, class: "btn btn-outline-dark" %>
 <% end %>
 </div>
