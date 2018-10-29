@@ -22,6 +22,8 @@ gem 'toastr-rails'
 gem 'jquery-rails'
 gem 'stripe'
 gem 'material_design_icons'
+gem 'rails_12factor', group: :production
+gem 'sprockets'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
