@@ -8,7 +8,7 @@
  */
 :root {
   --blue: #007bff;
-  --indigo: #6610f2;
+  --indigo: #000;
   --purple: #6f42c1;
   --pink: #e83e8c;
   --red: #dc3545;
@@ -36,10 +36,6 @@
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Inter UI", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
-  @font-face {
-    font-family: 'Inter UI Regualr';
-    src:
-  font-url('Inter-UI-Regualr.woff'); }
 
 
 *,
@@ -4376,7 +4372,7 @@ button.bg-light:focus {
   background-color: #d8e1e6 !important; }
 
 .bg-dark {
-  background-color: #343a40 !important; }
+  background-color: rgba(0,0,0,0.8) !important; }
 
 a.bg-dark:hover, a.bg-dark:focus,
 button.bg-dark:hover,
