@@ -13,19 +13,63 @@
   </div>
 </section>
 <section>
-  <div class="row d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-        <div class="col-md-6 bg-dark text-center text-white overflow-hidden">
-          <div class="my-3 py-3">
-            <h2 class="display-5 text-white">Another headline</h2>
-            <p class="lead">And an even wittier subheading.</p>
-          </div>
-
-        </div>
-        <div class="col-md-6 bg-light px-md-5 text-center overflow-hidden">
-          <div class="my-3 p-3">
-            <h2 class="display-5">Another headline</h2>
-            <p class="lead">And an even wittier subheading.</p>
-          </div>
-        </div>
+<div class="row d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+  <div class="col-md-6">
+    <div class="bg-dark text-center text-white overflow-hidden">
+      <div class="py-3">
+        <h3 class="display-5 text-white">Another headline</h3>
+        <p class="lead">And an even wittier subheading.</p>
       </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="bg-primary px-md-5 text-center overflow-hidden text-white">
+      <div class="p-3">
+        <h3 class="display-5 text-white">Another headline</h3>
+        <p class="lead">And an even wittier subheading.</p>
+      </div>
+    </div>
+  </div>
+</div>
 </section>
+<section>
+<div class="row d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+  <div class="col-md-6">
+    <div class="bg-dark text-center text-white overflow-hidden">
+      <div class="py-3">
+        <h3 class="display-5 text-white">Another headline</h3>
+        <p class="lead">And an even wittier subheading.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="bg-dark px-md-5 text-center overflow-hidden text-white">
+      <div class="p-3">
+        <h3 class="display-5 text-white">Another headline</h3>
+        <p class="lead">And an even wittier subheading.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="bg-white">
+  <div class="row p-4">
+    <div class="col text-center">
+      <h2>Read our blog</h2>
+      <p class="lead">Here is a reason to read the posts below</p>
+    </div>
+  </div>
+  <div class="row p-4">
+    <% Blog.all.each do |post| %>
+      <div class="col">
+        <h4><%= post.title %></h4>
+        <p><%= post.excerpt %></p>
+        <%= link_to 'Read More', post %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+
+<%= render '/layouts/footer' %>

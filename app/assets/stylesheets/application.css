@@ -40,5 +40,16 @@
 }
 
 a {
-  color: #000;
+
 }
+
+
+.bg-dark h1 {color: #fff;}
+.bg-dark h2 {color: #fff;}
+.bg-dark h3 {color: #fff;}
+.bg-dark h4 {color: #fff;}
+
+.bg-light h1 {color: #333;}
+.bg-light h2 {color: #333;}
+.bg-light h3 {color: #333;}
+.bg-light h4 {color: #333;}
