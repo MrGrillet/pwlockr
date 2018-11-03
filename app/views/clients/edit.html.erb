@@ -1,6 +1,40 @@
-<h1>Editing Client</h1>
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to current_tenant.name, dashboard_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to 'Clients', tenant_clients_path %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page"><%= @client.name %></li>
+    </ol>
+  </nav>
+
+  <div class="dropdown">
+    <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+      <i class="material-icons">settings</i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
+      <a class="dropdown-item" href="#">Share</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item text-danger" href="#">Leave</a>
+    </div>
+  </div>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <h6>Editing Client</h6>
+    <h1><%= @client.name %></h1>
+  </div>
+</div>
+<div class="container">
+
+
 
 <%= render 'form', client: @client %>
 
-<%= link_to 'Show', @client %> |
-<%= link_to 'Back', clients_path %>
+<%= link_to 'Show', tenant_client_path(@client) %> |
+<%= link_to 'Back', tenant_clients_path %>
+</div>

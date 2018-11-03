@@ -7,8 +7,7 @@
 <div class="container">
 <p id="notice"><%= notice %></p>
     <% @blogs.each do |blog| %>
-    <div class="mb-3">
-      <hr>
+    <div class="my-4 py-4">
       <h2><a href="<%= blog_path(blog) %>"><%= blog.title %></a></h2>
       <p class="lead"><%= blog.excerpt %></p>
       <%= link_to 'Show', blog, class: "btn btn-primary" %>

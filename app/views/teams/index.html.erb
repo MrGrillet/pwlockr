@@ -2,10 +2,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html"><%= current_tenant.name %></a>
-      </li>
-      <li class="breadcrumb-item">
-        <a href="#"><%= User.find(current_user.id).member.first_name %> <%= User.find(current_user.id).member.last_name %></a>
+        <%= link_to current_tenant.name, dashboard_path %>
       </li>
       <li class="breadcrumb-item active" aria-current="page">Teams</li>
     </ol>
@@ -22,7 +19,6 @@
       <a class="dropdown-item text-danger" href="#">Leave</a>
     </div>
   </div>
-
 </div>
 
 

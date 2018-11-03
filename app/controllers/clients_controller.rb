@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: [:show, :edit, :update, :destroy]
-  before_action :set_tenant, only: [:show, :edit, :update, :destroy, :new, :create]
+  before_action :set_tenant, only: [:index, :show, :edit, :update, :destroy, :new, :create]
 
   def index
     @clients = Client.all
@@ -45,7 +45,7 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy
     respond_to do |format|
-      format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
+      format.html { redirect_to tenant_clients_path, notice: 'Client was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

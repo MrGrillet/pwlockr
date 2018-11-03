@@ -6,7 +6,7 @@ class TeamsController < ApplicationController
 
   def index
     @teams = Team.by_user_plan_and_tenant(params[:tenant_id], current_user)
-    @staff = User.all
+    @staff = User.where(tenant_id: @tenant)
   end
 
   def show
@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to root_url, notice: 'Team was successfully created.' }
+        format.html { redirect_to tenant_teams_path, notice: 'Team was successfully created.' }
       else
         format.html { render :new }
       end
@@ -35,7 +35,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to root_url, notice: 'Team was successfully updated.' }
+        format.html { redirect_to tenant_teams_path, notice: 'Team was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -51,9 +51,9 @@ class TeamsController < ApplicationController
   end
 
   def users
-    @team_users = (@team.users + (User.where(tenant_id: @tenant.id, is_admin: true))) - [current_user]
+    @team_users = (@team.users + (User.where(tenant_id: @tenant.id, is_organisation_admin: true))) - [current_user]
 
-    @other_users = @tenant.users.where(is_admin: false) - (@team_users + [current_user])
+    @other_users = @tenant.users.all - (@team_users + [current_user])
   end
 
   def add_user

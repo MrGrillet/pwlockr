@@ -6,8 +6,7 @@
 <div class="container">
 <p id="notice"><%= notice %></p>
     <% @faqs.each do |faq| %>
-    <div class="mb-3">
-      <hr>
+    <div class="my-4 py-4">
       <h2><a href="<%= faq_path(faq) %>"><%= faq.title %></a></h2>
       <p class="lead"><%= faq.excerpt %></p>
       <%= link_to 'Show', faq, class: "btn btn-primary" %>

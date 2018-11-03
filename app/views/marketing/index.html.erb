@@ -62,10 +62,10 @@
   </div>
   <div class="row p-4">
     <% Blog.all.each do |post| %>
-      <div class="col">
+      <div class="col-md-4 mb-4">
         <h4><%= post.title %></h4>
         <p><%= post.excerpt %></p>
-        <%= link_to 'Read More', post %>
+        <%= link_to 'Read More >', post %>
       </div>
     <% end %>
   </div>

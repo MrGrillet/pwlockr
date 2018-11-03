@@ -1,4 +1,26 @@
-<div class="container">  
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to current_tenant.name, dashboard_path %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Teams</li>
+    </ol>
+  </nav>
+
+  <div class="dropdown">
+    <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+      <i class="material-icons">settings</i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
+      <a class="dropdown-item" href="#">Share</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item text-danger" href="#">Leave</a>
+    </div>
+  </div>
+</div>
+<div class="container">
   <%- model_class = Team -%>
   <div class="page-header">
     <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>

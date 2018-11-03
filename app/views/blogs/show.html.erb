@@ -1,19 +1,34 @@
 <div class="jumbotron">
   <div class="container">
-    <h1><%= @blog.title %></h1>
-    <p class="lead"><%= @blog.excerpt %></p>
+    <div class="row">
+      <div class="col-md-8">
+        <h1><%= @blog.title %></h1>
+        <p class="lead"><%= @blog.excerpt %></p>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="container">
-  <p><%= simple_format(@blog.body) %></p>
-
-  <hr>
-  <div class="">
-    <%= link_to 'All Posts', blogs_path, class: "btn btn-primary mr-2" %>
-    <% if current_user && current_user.is_admin? %>
-      <%= link_to 'Edit', edit_blog_path(@blog) %>
-    <% end %>
+  <div class="row">
+    <div class="col-md-8">
+      <p><%= simple_format(@blog.body) %></p>
+      <hr>
+      <div class="">
+        <%= link_to 'All Posts', blogs_path, class: "btn btn-primary mr-2" %>
+        <% if current_user && current_user.is_admin? %>
+          <%= link_to 'Edit', edit_blog_path(@blog) %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h6>More from the blog</h6>
+      <ul>
+        <% Blog.all.each do |post| %>
+          <li><%= link_to post.title, post %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>
 

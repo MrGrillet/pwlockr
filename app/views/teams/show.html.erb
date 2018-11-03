@@ -2,12 +2,12 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="index.html"><%= current_tenant.name %></a>
+        <%= link_to current_tenant.name, root_path %>
       </li>
       <li class="breadcrumb-item">
-        <a href="pages-app.html">User Name</a>
+        <a href="<%= dashboard_path %>"><%= User.find(current_user.id).member.first_name %> <%= User.find(current_user.id).member.last_name %></a>
       </li>
-      <li class="breadcrumb-item active" aria-current="page">Teams</li>
+      <li class="breadcrumb-item active" aria-current="page"><%= @team.name %></li>
     </ol>
   </nav>
 
@@ -22,21 +22,15 @@
       <a class="dropdown-item text-danger" href="nav-side-team.html#">Leave</a>
     </div>
   </div>
-
 </div>
 
 <div class="container">
-
-
-
-<%- model_class = Team -%>
-<div class="page-header">
-  <h1><%= @team.name %></h1>
-</div>
+  <%- model_class = Team -%>
+  <div class="page-header">
+    <h1><%= @team.name %></h1>
+  </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @team.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @team.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:image_logo) %>:</strong></dt>
@@ -47,9 +41,9 @@
   <dd><%= @team.tenant_id %></dd>
 </dl>
 
-<%= link_to "Organisation home", root_path, :class => 'btn btn-default'  %>
 
-<%= link_to 'edit team users', users_tenant_team_path(@team.id), class: "btn btn-primary"  %>
+
+<%= link_to 'edit team users', users_tenant_team_path(@team.id, tenant_id: @tenant.id), class: "btn btn-primary"  %>
 
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_tenant_team_path(team: @team, tenant: @team.tenant_id), :class => 'btn btn-default' %>

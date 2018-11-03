@@ -1,8 +1,14 @@
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h1><%= @faq.title %></h1>
+        <p class="lead"><%= @faq.excerpt %></p>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container">
-  <% notice %>
-  <h1><%= @faq.title %></h1>
-  <p class="lead"><%= @faq.excerpt %></p>
-  <hr>
   <p><%= simple_format(@faq.answer) %></p>
 
   <hr>

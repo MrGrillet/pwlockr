@@ -9,7 +9,7 @@ class Team < ApplicationRecord
   validate :free_plan_can_only_have_one_team
 
   def free_plan_can_only_have_one_team
-    if self.new_record? && (tenant.teams.count > 0) && (tenant.plan == 'free')
+    if self.new_record? && (tenant.teams.count > 3) && (tenant.plan == 'free')
       errors.add(:base, "Free plans cannot have more than one team")
     end
   end
@@ -24,9 +24,9 @@ class Team < ApplicationRecord
       end
     else
       if user.is_admin?
-        tenant.teams.order(:id).limit(1)
+        tenant.teams.order(:id).limit(3)
       else
-        user.teams.where(tenant_id: tenant.id).order(:id).limit(1)
+        user.teams.where(tenant_id: tenant.id).order(:id).limit(3)
       end
     end
   end
