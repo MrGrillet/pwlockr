@@ -28,6 +28,8 @@ class MembersController < ApplicationController
   def dashboard
     @user_passwords = Password.where(tenant_id: @tenant)
     @teams = Team.where(tenant_id: @tenant)
+    @passwords = Password.all
+    @clients = Client.all
   end
 
   def activity

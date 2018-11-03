@@ -1,8 +1,24 @@
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to 'Admin', admin_path %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">New Blog Post</li>
+    </ol>
+  </nav>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <h1>New Blog Post</h1>
+    <p class="lead">Put the user first.</p>
+  </div>
+</div>
+
 <div class="container">
-  <h1>New Blog</h1>
+
 
   <%= render 'form', blog: @blog %>
 
-  <%= link_to 'Back', blogs_path %>
-  
+
 </div>

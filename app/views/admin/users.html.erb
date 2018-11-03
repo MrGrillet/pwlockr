@@ -1,52 +1,50 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-11 col-xl-10">
-      <div class="page-header">
-        <h1>Users</h1>
-        <p class="lead">Put the user first.</p>
-      </div>
-    </div>
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to 'Admin', admin_path %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Users</li>
+    </ol>
+  </nav>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Users</h1>
+    <p class="lead">Put the user first.</p>
   </div>
-
-
-
-<form class="" id="user-manage-modal" tabindex="-1" role="dialog" aria-labelledby="user-manage-modal" style="display: block; padding-left: 0px;">
-  <div class="" role="document">
-    <div class="modal-content">
-
-      <div class="">
-        <div class="users-manage" data-filter-list="form-group-users">
-
-          <div class="input-group input-group-round">
-
-            <input type="search" class="form-control filter-list-input" placeholder="Search users" aria-label="Filter Members" aria-describedby="filter-members">
-          </div>
-        <% @users.each do |user| %>
-          <div class="form-group-users filter-list-1540589237272">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="user-manage-1" checked="">
-              <label class="custom-control-label" for="user-manage-1">
-                <div class="d-flex align-items-center">
-                  <img alt="Claire Connors" src="<%= asset_path('avatar-female-1.jpg') %>" class="avatar mr-2">
-                  <span class="h6 mb-0 SPAN-filter-by-text" data-filter-by="text"><%= user.email %></span>
-                </div>
-              </label>
+</div>
+<div class="container">
+  <form class="" id="user-manage-modal" tabindex="-1" role="dialog" aria-labelledby="user-manage-modal" style="display: block; padding-left: 0px;">
+    <div class="" role="document">
+      <div class="modal-content">
+        <div class="">
+          <div class="users-manage" data-filter-list="form-group-users">
+            <div class="input-group input-group-round">
+              <input type="search" class="form-control filter-list-input" placeholder="Search users" aria-label="Filter Members" aria-describedby="filter-members">
             </div>
-          <% end %>
-
-
-
+            <% @users.each do |user| %>
+              <div class="form-group-users filter-list-1540589237272">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="user-manage-1" checked="">
+                  <label class="custom-control-label" for="user-manage-1">
+                    <div class="d-flex align-items-center">
+                      <img alt="Claire Connors" src="<%= asset_path('avatar-female-1.jpg') %>" class="avatar mr-2">
+                      <span class="h6 mb-0 SPAN-filter-by-text" data-filter-by="text"><%= user.email %></span>
+                    </div>
+                  </label>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-      <!--end of modal body-->
-      <div class="modal-footer">
-        <button role="button" class="btn btn-primary" type="submit">
-          Done
-        </button>
+        <!--end of modal body-->
+        <div class="modal-footer">
+          <button role="button" class="btn btn-primary" type="submit">
+            Done
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</form>
-
+  </form>
 </div>

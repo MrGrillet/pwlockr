@@ -15,11 +15,11 @@
   <div class="container">
     <h6>Editing Client</h6>
     <h1><%= @client.name %></h1>
+    <p><%= link_to 'Show', tenant_client_path(@client) %></p>
   </div>
 </div>
 <div class="container">
   <%= render 'form', client: @client %>
 
-  <%= link_to 'Show', tenant_client_path(@client) %> |
-  <%= link_to 'Back', tenant_clients_path %>
+
 </div>

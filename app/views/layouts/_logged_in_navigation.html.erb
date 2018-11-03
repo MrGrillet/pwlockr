@@ -10,7 +10,7 @@
       </button>
       <div class="dropdown-menu" aria-labelledby="newContentButton">
         <%= link_to "Password", new_password_path, class: 'dropdown-item' %>
-        <%= link_to "Team Member", new_member_path, class: 'dropdown-item' %>
+        <%= link_to "Team Member", new_tenant_member_path(@tenant), class: 'dropdown-item' %>
         <%= link_to "Client", new_tenant_client_path(tenant_id: @tenant.id), class: 'dropdown-item' %>
       </div>
     </div>
@@ -33,58 +33,56 @@
   <div class="collapse navbar-collapse flex-column" id="navbar-collapse">
     <ul class="navbar-nav d-lg-block">
       <li class="nav-item">
-
         <%= link_to 'Dashboard', dashboard_path, class: 'nav-link' %>
       </li>
 
-<% if current_user.is_admin? %>
-      <li class="nav-item">
+      <% if current_user.is_admin? %>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3">Admin Menu</a>
+          <div id="submenu-3" class="collapse">
+            <ul class="nav nav-small flex-column">
+              <li class="nav-item">
+                <%= link_to 'Dashboard', admin_dashboard_path, class: 'nav-link' %>
+              </li>
 
-        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3">Admin Menu</a>
-        <div id="submenu-3" class="collapse">
-          <ul class="nav nav-small flex-column">
+              <li class="nav-item">
+                <%= link_to 'Organisations', admin_organisations_path, class: 'nav-link' %>
+              </li>
 
-            <li class="nav-item">
-              <%= link_to 'Dashboard', admin_path, class: 'nav-link' %>
-            </li>
+              <li class="nav-item">
+                <%= link_to 'Users', admin_users_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'New Blog Post', new_blog_path, class: 'nav-link' %>
+              </li>
+            </ul>
+          </div>
+        </li>
+      <% end %>
 
-            <li class="nav-item">
-              <%= link_to 'Users', admin_users_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'New Blog Post', new_blog_path, class: 'nav-link' %>
-            </li>
+      <% if current_user.is_admin? || current_user.is_manager? %>
+        <li class="nav-item">
 
-          </ul>
-        </div>
+          <a class="nav-link" href="nav-side-project.html#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2">Manager Menu</a>
+          <div id="submenu-2" class="collapse">
+            <ul class="nav nav-small flex-column">
+              <li class="nav-item">
+                <%= link_to 'Team Members', tenant_teams_path(@tenant.id), class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pages-utility.html">Manage Passwords</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="pages-utility.html">Activity</a>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Manage Organisation', edit_tenant_path(@tenant.id), class: 'nav-link' %>
 
-      </li>
-<% end %>
+              </li>
+            </ul>
+          </div>
 
-
-<% if current_user.is_admin? || current_user.is_manager? %>
-      <li class="nav-item">
-
-        <a class="nav-link" href="nav-side-project.html#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2">Manager Menu</a>
-        <div id="submenu-2" class="collapse">
-          <ul class="nav nav-small flex-column">
-            <li class="nav-item">
-              <%= link_to 'Team Members', tenant_teams_path(@tenant.id), class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages-utility.html">Manage Passwords</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages-utility.html">Activity</a>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Manage Organisation', edit_tenant_path(@tenant.id), class: 'nav-link' %>
-
-            </li>
-          </ul>
-        </div>
-
-      </li>
+        </li>
       <% end %>
 
       <li class="nav-item">
@@ -98,58 +96,48 @@
       </li>
       <li class="nav-item">
         <%# link_to 'My Account', @tenant.id, class: "nav-link" %>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<%= faqs_path %>">FAQ</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<%= blogs_path %>">Blog</a>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to('Logout', destroy_user_session_path, class: 'nav-link', title: 'Logout', :method => :delete) %>
-
-      </li>
-
-    </ul>
-    <!-- <hr>
-    <div class="d-none d-lg-block w-100">
-      <span class="text-small text-muted">Recent Passwords</span>
-      <ul class="nav nav-small flex-column mt-2">
-        <li class="nav-item">
-          <a href="nav-side-kanban-board.html" class="nav-link">Password 1</a>
-          <a href="nav-side-kanban-board.html" class="nav-link">Password 2</a>
-          <a href="nav-side-kanban-board.html" class="nav-link">Password 3</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<%= faqs_path %>">FAQ</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<%= blogs_path %>">Blog</a>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to('Logout', destroy_user_session_path, class: 'nav-link', title: 'Logout', :method => :delete) %>
+
+        </li>
+
       </ul>
-      <hr>
-    </div> -->
+      <!-- <hr> <div class="d-none d-lg-block w-100"> <span class="text-small text-muted">Recent Passwords</span> <ul class="nav nav-small flex-column mt-2"> <li class="nav-item"> <a href="nav-side-kanban-board.html" class="nav-link">Password 1</a> <a
+      href="nav-side-kanban-board.html" class="nav-link">Password 2</a> <a href="nav-side-kanban-board.html" class="nav-link">Password 3</a> </li> </ul> <hr> </div> -->
 
-  </div>
-  <div class="d-none d-lg-block">
-    <div class="dropup">
-      <a href="nav-side-project.html#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <img alt="Image" src="<%= asset_path('avatar-male-4.jpg') %>" class="avatar"/>
-      </a>
-      <div class="dropdown-menu">
-        <%= link_to "View Profile", member_path(current_user.id), class: 'dropdown-item' %>
-        <%= link_to "Account Settings", edit_user_registration_path, class: 'dropdown-item' %>
+    </div>
+    <div class="d-none d-lg-block">
+      <div class="dropup">
+        <a href="nav-side-project.html#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img alt="Image" src="<%= asset_path('avatar-male-4.jpg') %>" class="avatar"/>
+        </a>
+        <div class="dropdown-menu">
+          <%= link_to "View Profile", tenant_member_path(@tenant, current_user.id), class: 'dropdown-item' %>
+          <%= link_to "Account Settings", edit_user_registration_path, class: 'dropdown-item' %>
 
+        </div>
       </div>
     </div>
-  </div>
 
-  <ul class="nav navbar-right col-md-4">
-    <% if current_user %>
+    <ul class="nav navbar-right col-md-4">
+      <% if current_user %>
 
-      <li class="col-md-3 logout"></li>
+        <li class="col-md-3 logout"></li>
 
-    <% else %>
-      <li class="col-md-4 pull-right">
-        <%= link_to('Sign In', new_user_session_path, class: 'btn btn-primary', title: 'Sign In') %>
-      </li>
+      <% else %>
+        <li class="col-md-4 pull-right">
+          <%= link_to('Sign In', new_user_session_path, class: 'btn btn-primary', title: 'Sign In') %>
+        </li>
 
-    <% end %>
-  </ul>
+      <% end %>
+    </ul>

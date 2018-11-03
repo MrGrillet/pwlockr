@@ -4,10 +4,15 @@ class PasswordsController < ApplicationController
 
   def index
     @passwords = Password.all
-    @user_passwords = Password.where(team_id: '').where(client_id: '')
+    @user_passwords = Password.all
+    @clients = Client.all
+    @teams = Team.all
   end
 
   def show
+    @passwords = Password.all
+    @teams = Team.all
+    @users = User.all
   end
 
   def new
@@ -19,7 +24,7 @@ class PasswordsController < ApplicationController
 
   def create
     @password = Password.new(password_params)
-    
+
 
     respond_to do |format|
       if @password.save

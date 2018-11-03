@@ -1,4 +1,23 @@
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to current_tenant.name, dashboard_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to 'Team members', tenant_members_path %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page"><%= User.find(@user).member.first_name %></li>
+    </ol>
+  </nav>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <h1><%= User.find(@user).member.first_name %> Profile Page</h1>
+    <p></p>
+  </div>
+</div>
 <div class="container">
-  <h1><%= User.find(@user).member.first_name %> Profile Page</h1>
+
 
 </div>

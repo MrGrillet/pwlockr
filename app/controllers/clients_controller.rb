@@ -7,6 +7,9 @@ class ClientsController < ApplicationController
   end
 
   def show
+    @passwords = Password.all
+    @teams = Team.all
+    @users = User.all
   end
 
   def new
@@ -61,6 +64,6 @@ class ClientsController < ApplicationController
     end
 
     def client_params
-      params.require(:client).permit(:name, :description, :tenant_id)
+      params.require(:client).permit(:name, :description, :tenant_id, :manager_id)
     end
 end

@@ -33,7 +33,7 @@
   </div>
 </div>
 <div class="container">
-  <h2>Users in project</h2>
+  <h2>Users in team</h2>
   <table class="my-4">
     <thead>
       <tr>
@@ -42,12 +42,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @team_users.each do |team_user| %>
+      <% @team_users.each do |team_member| %>
         <tr>
-          <td><%= other_user.member.first_name %> <%= other_user.member.last_name %></td>
+          <td><%= team_member.member.first_name %> <%= team_member.member.last_name %></td>
           <td>
-            <% if !team_user.is_admin? %>
-              <%= link_to "Remove", user_teams_path(team_user.user_teams.find_by(team_id: @team.id), tenant_id: @team.tenant_id), :method => :delete, :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?') )}, class: "btn btn-danger" %>
+            <% if !team_member.is_admin? %>
+              <%= link_to "Remove", user_teams_path(team_member.user_teams.find_by(team_id: @team.id), tenant_id: @team.tenant_id), :method => :delete, :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?') )}, class: "btn btn-danger" %>
             <% end %>
           </td>
         </tr>

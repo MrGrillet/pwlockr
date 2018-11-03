@@ -17,9 +17,11 @@ Rails.application.routes.draw do
     end
     resources :clients
     resources :projects
+    resources :members
+    resources :passwords
   end
 
-  resources :members
+
 
 
 
@@ -39,6 +41,8 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'members#dashboard'
   get 'admin', to: 'admin#index'
   get 'admin/users', to: 'admin#users'
+  get 'admin/dashboard', to: 'admin#dashboard'
+  get 'admin/organisations', to: 'admin#organisations'
   get 'blog', to: 'blogs#index'
   get 'members/activity', to: 'members#activity'
 

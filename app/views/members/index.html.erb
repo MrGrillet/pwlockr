@@ -1,0 +1,31 @@
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to current_tenant.name, dashboard_path %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Team Members</li>
+    </ol>
+  </nav>
+
+  <div class="dropdown">
+    <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
+      <i class="material-icons">settings</i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+      <%= link_to 'Edit', edit_tenant_path(@tenant), class: 'dropdown-item' %>
+
+      <%= link_to 'Destroy', tenant_path(@tenant), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item text-danger" %>
+    </div>
+  </div>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Team Members</h1>
+    <p>
+      <%= 'Organisation Administrator: '+ User.find(1).member.first_name %></p>
+  </div>
+</div>
+<div class="container">
+
+</div>

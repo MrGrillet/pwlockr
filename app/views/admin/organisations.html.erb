@@ -1,15 +1,19 @@
 <div class="navbar bg-white breadcrumb-bar">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">Admin</li>
+      <li class="breadcrumb-item">
+        <%= link_to 'Admin', admin_path %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Organisations</li>
     </ol>
   </nav>
 </div>
 <div class="jumbotron">
   <div class="container">
-    <h1>Dashboard</h1>
+    <h1>Organisations</h1>
     <p class="lead">Put the user first.</p>
     <%= link_to 'Dashboard', admin_dashboard_path, class: "btn btn-primary mr-2" %>
+    <%= link_to 'Organisations', admin_organisations_path, class: "btn btn-primary mr-2" %>
     <%= link_to 'Users', admin_users_path, class: "btn btn-primary" %>
   </div>
 </div>

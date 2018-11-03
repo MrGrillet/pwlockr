@@ -10,7 +10,9 @@ class TeamsController < ApplicationController
   end
 
   def show
-
+    @passwords = Password.all
+    @clients = Client.all
+    @users = User.all
   end
 
   def new
@@ -85,6 +87,6 @@ class TeamsController < ApplicationController
     end
 
     def team_params
-      params.require(:team).permit(:name, :description, :image_logo, :image_hero, :tenant_id)
+      params.require(:team).permit(:name, :description, :image_logo, :image_hero, :tenant_id, :manager_id)
     end
 end
