@@ -1,7 +1,23 @@
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to current_tenant.name, dashboard_path %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">New Password</li>
+    </ol>
+  </nav>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <h1>New Password</h1>
+  </div>
+</div>
+
 <div class="row justify-content-center">
   <div class="col-lg-11 col-xl-10">
     <div class="page-header">
-      <h1>New Password</h1>
+
       <%= render 'form', password: @password %>
       <%= link_to 'Back', passwords_path %>
     </div>

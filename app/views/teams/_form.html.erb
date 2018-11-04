@@ -15,28 +15,34 @@
     </div>
   <% end %>
 
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label"><%= f.label :name %></label>
+    <div class="col-sm-10">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :description, :class => 'control-label' %>
-    <div class="controls">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label"><%= f.label :description %></label>
+    <div class="col-sm-10">
       <%= f.text_field :description, :class => 'form-control' %>
     </div>
   </div>
 
-  <h4>Assign Manager</h4>
-  <%= f.select(:manager_id, User.all.collect { |user| [ user.member.first_name , user.id ]}, {:include_blank => "None"}, {:class => 'custom-select'}) %>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Assign Manager</label>
+    <div class="col-sm-10">
+      <%= f.select(:manager_id, User.all.collect { |user| [ user.member.first_name , user.id ]}, {:include_blank => "None"}, {:class => 'custom-select'}) %>
+    </div>
+  </div>
 
 
-  <br />
-  <%= f.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            root_path, :class => 'btn btn-default' %>
+
+  <div class="form-group row">
+    <div class="col-sm-10 offset-sm-2 mt-4">
+      <%= f.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+    </div>
+  </div>
 
 <% end %>

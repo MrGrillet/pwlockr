@@ -9,15 +9,7 @@
   </nav>
 
   <div class="dropdown">
-    <button class="btn btn-round" role="button" data-toggle="dropdown" aria-expanded="false">
-      <i class="material-icons">settings</i>
-    </button>
-    <div class="dropdown-menu dropdown-menu-right">
-      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#team-manage-modal">Edit Team</a>
-      <a class="dropdown-item" href="#">Share</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item text-danger" href="#">Leave</a>
-    </div>
+    <%= link_to 'New Client', new_tenant_client_path, class: "btn btn-primary" %>
   </div>
 </div>
 <div class="jumbotron">
@@ -25,53 +17,90 @@
     <h1>Clients</h1>
   </div>
 </div>
-<div class="container">
-  <div class="content-list-body">
-    <div class="card-list">
-      <% @clients.each do |client| %>
-        <div class="card-list-body">
-          <div class="card card-task">
-            <div class="progress">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <div class="card-body">
-              <div class="card-title">
-                <a href="<%= tenant_client_path(id: client.id, tenant_id: client.tenant_id) %>">
-                  <h6 data-filter-by="text" class="H6-filter-by-text"><%= client.name %></h6>
-                </a>
-                <span class="text-small"><%= client.description %></span>
-              </div>
-              <div class="card-meta">
-                <ul class="avatars">
-                  <li>
-                    <a href="nav-side-project.html#" data-toggle="tooltip" title="Kenny">
-                      <img alt="Kenny Tran" class="avatar" src="<%= asset_path('avatar-male-6.jpg') %>">
-                    </a>
-                  </li>
-                </ul>
-                <div class="d-flex align-items-center">
-                  <%= link_to 'View', tenant_client_path(id: client.id, tenant_id: client.tenant_id), class: "btn btn-primary" %>
-                </div>
-                <div class="dropdown card-options">
-                    <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Options
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <%= link_to 'Edit', edit_tenant_client_path(@tenant, client), class: 'dropdown-item' %>
 
-                        <%= link_to 'Destroy', tenant_client_path(@tenant, client), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item text-danger" %>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+      <div class="col-lg-11 col-xl-10">
+        <div class="text-center p-4">
+
+        </div>
+          <div class="tab-content">
+
+
+            <div class="content-list">
+
+
+              <div class="content-list-body row">
+
+
+
+<% @clients.each do |client| %>
+                <div class="col-lg-6">
+                  <div class="card card-project">
+
+                    <div class="progress">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                </div>
-              </div>
+
+                    <div class="card-body">
+                        <div class="dropdown card-options">
+                            <button class="btn-options" type="button" id="project-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Options
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <%= link_to 'Edit', edit_tenant_client_path(@tenant, client), class: 'dropdown-item' %>
+                                <%= link_to 'Destroy', tenant_client_path(@tenant, client), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item text-danger" %>
+                            </div>
+                        </div>
+                        <div class="card-title">
+                            <a href="<%= tenant_client_path(id: client.id, tenant_id: client.tenant_id) %>">
+                                <h5 data-filter-by="text"><%= client.name %></h5>
+                            </a>
+                            <span class="text-small"><%= client.description %></span>
+
+
+
+                            <div class="d-flex align-items-center mt-2">
+                                    <ul class="avatars mb-1">
+                                      <% client.team_ids.each do |team| %>
+                                        <li>
+                                            <a href="<%= tenant_team_path(@tenant, team) %>" data-toggle="tooltip" data-placement="top" title="<%= Team.find(team).name %>">
+                                                <img alt="<%= Team.find(team).name %>" class="avatar" src="<%= asset_path('avatar-male-6.jpg') %>" />
+                                            </a>
+                                        </li>
+                                      <% end %>
+
+                            <li>  <button class="btn btn-round ml-1" data-toggle="modal" data-target="#user-invite-modal">
+                                  <i class="material-icons">add</i>
+                              </button></li>
+
+
+
+                                    </ul>
+
+                                </div>
+
+                        </div>
+
+                                <div class="card-meta d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <%= link_to 'View', tenant_client_path(id: client.id, tenant_id: client.tenant_id), class: "btn btn-primary" %>
+                                    </div>
+                                    <span class="text-small" data-filter-by="text">
+                                      <a href="<%= tenant_members_path(@tenant, client.manager_id) %>" data-toggle="tooltip" title="<%= User.find(client.manager_id).member.first_name %>">
+                                        <img alt="<%= User.find(client.manager_id).member.first_name %>" class="avatar" src="<%= asset_path('avatar-male-6.jpg') %>" data-filter-by="alt" />
+                                      </a>
+
+                                      </span>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+<% end %>
+
           </div>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
-<br>
-
-<%= link_to 'New Client', new_tenant_client_path, class: "btn btn-primary" %>
-
-
-
 </div>

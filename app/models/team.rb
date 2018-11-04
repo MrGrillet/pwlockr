@@ -5,6 +5,9 @@ class Team < ApplicationRecord
   has_many :user_teams
   has_many :users, through: :user_teams
 
+  has_many :team_clients
+  has_many :clients, through: :team_clients
+
   validates_uniqueness_of :name
   validate :free_plan_can_only_have_one_team
 

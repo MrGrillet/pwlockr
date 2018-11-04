@@ -1,6 +1,20 @@
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Blog</li>
+    </ol>
+  </nav>
+
+  <div class="dropdown">
+    <% if current_user && current_user.is_admin? %>
+      <%= link_to 'Add new blog post', new_blog_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
 <div class="jumbotron">
   <div class="container">
-    <h1>Blog</h1>
+    <h1>Teams</h1>
+    <p class="lead">These are all of the teams and clients that you have access to</p>
   </div>
 </div>
 
@@ -19,9 +33,7 @@
     <% end %>
 <br>
 
-<% if current_user && current_user.is_admin? %>
-  <%= link_to 'New blog', new_blog_path, class: "btn btn-outline-dark" %>
-<% end %>
+
 </div>
 
 <%= render '/layouts/footer' %>

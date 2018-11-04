@@ -1,11 +1,23 @@
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to current_tenant.name, dashboard_path %>
+      </li>
+      <li class="breadcrumb-item">
+        <%= link_to @team.name, tenant_team_path(@tenant, @team) %>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Edit Teams</li>
+    </ol>
+  </nav>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Editing Team</h1>
+    <%= link_to 'Back', root_path %>
+  </div>
+</div>
+
 <div class="container">
-<h1>Editing Team</h1>
-
-<%= render 'form', team: @team %>
-
-
-<%= link_to 'Back', root_path %>
-
-
-
+  <%= render 'form', team: @team %>
 </div>

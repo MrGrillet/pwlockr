@@ -1,8 +1,23 @@
+<div class="navbar bg-white breadcrumb-bar">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+    </ol>
+  </nav>
+
+  <div class="dropdown">
+    <% if current_user && current_user.is_admin? %>
+      <%= link_to 'Add New Faq', new_faq_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
 <div class="jumbotron">
   <div class="container">
     <h1>FAQ</h1>
+    <p class="lead">We all need a little help from time to time</p>
   </div>
 </div>
+
 <div class="container">
 <p id="notice"><%= notice %></p>
     <% @faqs.each do |faq| %>
@@ -18,9 +33,7 @@
     <% end %>
 <br>
 
-<% if current_user && current_user.is_admin? %>
-  <%= link_to 'New Faq', new_faq_path, class: "btn btn-outline-dark" %>
-<% end %>
+
 </div>
 
 <%= render '/layouts/footer' %>

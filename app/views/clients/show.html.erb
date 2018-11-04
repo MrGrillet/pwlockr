@@ -32,7 +32,10 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-11 col-xl-10">
-      <p class="lead"><%= @client.description %></p>
+      <div class="text-center p-4">
+        <p class="lead"><%= @client.description %></p>
+      </div>
+
       <ul class="nav nav-tabs nav-fill">
 
         <li class="nav-item">
@@ -51,17 +54,7 @@
           <div class="card-list">
             <div class="card-list-head">
               <h6>Passwords</h6>
-              <div class="dropdown">
-
-                <button class="btn-options" type="button" id="cardlist-dropdown-button-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">Add New</i>
-                </button>
-
-                <div class="dropdown-menu dropdown-menu-right">
-
-                  <a class="dropdown-item text-danger" href="nav-side-project.html#">Archive</a>
-                </div>
-              </div>
+              <%= link_to 'Add Password', new_tenant_password_path %>
             </div>
             <div class="card-list-body">
 
@@ -113,30 +106,20 @@
           <div class="card-list">
             <div class="card-list-head">
               <h6>Teams</h6>
-              <div class="dropdown">
-
-                <button class="btn-options" type="button" id="cardlist-dropdown-button-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">Add New</i>
-                </button>
-
-                <div class="dropdown-menu dropdown-menu-right">
-
-                  <a class="dropdown-item text-danger" href="nav-side-project.html#">Archive</a>
-                </div>
-              </div>
+              <%= link_to 'Add Team', tenant_client_path %>
             </div>
-            <% @teams.each do |client| %>
+            <% @client.team_ids.each do |team| %>
               <div class="card card-task">
                 <div class="progress">
                   <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="card-body">
                   <div class="card-title">
-                    <a href="nav-side-project.html#">
-                      <h6 data-filter-by="text"><%= client.name %></h6>
+                    <a href="<%= tenant_team_path(team) %>">
+                      <h6 data-filter-by="text"><%= Team.find(team).name %></h6>
                     </a>
-                    <span class="text-small">Updated
-                      <%= client.updated_at %></span>
+                    <span class="text-small">
+                      <%= Team.find(team).updated_at %></span>
                   </div>
                   <div class="card-meta">
                     <ul class="avatars">
@@ -147,16 +130,16 @@
                       </li>
                     </ul>
                     <div class="d-flex align-items-center">
-                      <%= link_to 'View', tenant_client_path(id: client, tenant_id: client.tenant), class: "btn btn-primary" %>
+                      <%= link_to 'View', tenant_team_path(@tenant, team), class: "btn btn-primary" %>
                     </div>
                     <div class="dropdown card-options">
                       <button class="btn-options" type="button" id="task-dropdown-button-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Options
                       </button>
                       <div class="dropdown-menu dropdown-menu-right">
-                        <%= link_to 'Edit', edit_tenant_client_path(@tenant, client), class: 'dropdown-item' %>
+                        <%= link_to 'Edit', edit_tenant_team_path(@tenant, team), class: 'dropdown-item' %>
 
-                        <%= link_to 'Destroy', tenant_client_path(@tenant, client), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item text-danger" %>
+                        <%= link_to 'Destroy', tenant_team_path(@tenant, team), method: :delete, data: { confirm: 'Are you sure?' }, class: "dropdown-item text-danger" %>
                       </div>
                     </div>
                   </div>

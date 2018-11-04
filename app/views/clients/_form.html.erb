@@ -1,6 +1,5 @@
 
 <%= form_for [@tenant, client], :html => { :class => "form-horizontal team" } do |form| %>
-<%# form_with(model: client, local: true) do |form| %>
   <% if client.errors.any? %>
     <div id="error_explanation">
       <p class="lead"><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</p>
@@ -34,11 +33,25 @@
     </div>
   </div>
 
+  <div class="form-group row">
+    <p class="col-sm-2 col-form-label">Teams</p>
+    <div class="col">
+      <%= form.collection_check_boxes :team_ids, Team.all, :id, :name do |cb| %>
+        <div class="form-check form-check-inline">
+          <div class="input-checkbox">
+            <%= cb.check_box  %>
+            <label><%= cb.text %></label>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <%= form.hidden_field :tenant_id, value: params[:tenant_id], :class => 'form-control' %>
 
   <div class="form-group row">
     <div class="col-sm-10 offset-sm-2 mt-4">
-      <%= form.submit %>
+      <%= form.submit nil, class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>

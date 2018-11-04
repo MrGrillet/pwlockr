@@ -7,10 +7,11 @@ class TeamsController < ApplicationController
   def index
     @teams = Team.by_user_plan_and_tenant(params[:tenant_id], current_user)
     @staff = User.where(tenant_id: @tenant)
+    @clients = Client.all
   end
 
   def show
-    @passwords = Password.all
+    @passwords = Password.where(team_id: @team)
     @clients = Client.all
     @users = User.all
   end
